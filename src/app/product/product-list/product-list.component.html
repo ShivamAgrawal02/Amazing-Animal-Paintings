@@ -4,6 +4,16 @@
   <mat-form-field>
     <input matInput (keyup)="applyFilter($event)" placeholder="Search">
   </mat-form-field>
+
+    <mat-form-field  class="sort-dropdown">
+    <mat-select (selectionChange)="sortProducts($event.value)" placeholder="Sort">
+      <mat-option value="priceLowHigh">Price:Low To High</mat-option>
+       <mat-option value="priceHighLow">Price: High To Low</mat-option>
+       <mat-option value="nameAscending">Name: Ascending</mat-option>
+       <mat-option value="nameDescending">Name Descending</mat-option>
+    </mat-select>
+  </mat-form-field>
+
   <div fxLayout="row wrap" fxLayoutGap="50px grid">
       <div *ngFor="let product of filteredProducts">
           <mat-card class="product-card" (click)="AddToCart(product)">

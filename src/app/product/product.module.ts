@@ -6,6 +6,8 @@ import { FlexModule } from '@angular/flex-layout';
 import { MatSnackBarModule } from '@angular/material/snack-bar';
 import {MatInputModule} from '@angular/material/input';
 import {MatSelectModule} from '@angular/material/select';
+import { MatButtonModule } from "@angular/material/button";
+import { CdkVirtualScrollableElement } from "@angular/cdk/scrolling";
 
 
 @NgModule({
@@ -18,7 +20,9 @@ import {MatSelectModule} from '@angular/material/select';
     FlexModule,
     MatSnackBarModule,
     MatInputModule,
-    MatSelectModule
-  ]
+    MatSelectModule,
+    MatButtonModule,
+    CdkVirtualScrollableElement
+]
 })
 export class ProductModule { }
