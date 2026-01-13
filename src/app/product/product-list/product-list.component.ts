@@ -4,6 +4,7 @@ import { HttpClient } from '@angular/common/http';
 import { Product } from '../product';
 import { CartService } from 'src/app/cart/cart.service';
 import { MatSnackBar } from '@angular/material/snack-bar';
+import { SELECTION_LIST } from '@angular/material/list';
 
 
 
@@ -16,6 +17,7 @@ import { MatSnackBar } from '@angular/material/snack-bar';
 export class ProductListComponent implements OnInit {
 
   products:Product[]=[]
+  filteredProducts:Product[]=[];
   constructor(private productService:ProductService , private httpClient:HttpClient, private cartService:CartService, private snackBar:MatSnackBar)
   {
 
@@ -26,6 +28,7 @@ export class ProductListComponent implements OnInit {
       this.productService.getProducts().subscribe(data => 
       {
         this.products = data;
+        this.filteredProducts=data;
       }
       )
 
@@ -39,6 +42,13 @@ export class ProductListComponent implements OnInit {
           verticalPosition:"top"
         })
       }});
+  }
+
+  applyFilter(event:Event):void
+  {
+    let searchTerm = (event.target as HTMLInputElement).value;
+    searchTerm= searchTerm.toLowerCase();
+    this.filteredProducts=this.products.filter(product=>product.name.toLowerCase().includes(searchTerm));
   }
 
 }
