@@ -2,6 +2,8 @@ import { Component,OnInit } from '@angular/core';
 import { ProductService } from '../product.service';
 import { HttpClient } from '@angular/common/http';
 import { Product } from '../product';
+import { CartService } from 'src/app/cart/cart.service';
+import { MatSnackBar } from '@angular/material/snack-bar';
 
 
 
@@ -14,7 +16,7 @@ import { Product } from '../product';
 export class ProductListComponent implements OnInit {
 
   products:Product[]=[]
-  constructor(private productService:ProductService , private httpClient:HttpClient)
+  constructor(private productService:ProductService , private httpClient:HttpClient, private cartService:CartService, private snackBar:MatSnackBar)
   {
 
   }
@@ -27,6 +29,16 @@ export class ProductListComponent implements OnInit {
       }
       )
 
+  }
+  AddToCart(product:Product)
+  {
+      this.cartService.AddToCart(product).subscribe({next:()=>{
+        this.snackBar.open("Product Added To Cart"," ",{
+          duration:2000,
+          horizontalPosition:"right",
+          verticalPosition:"top"
+        })
+      }});
   }
 
 }
